@@ -1,10 +1,50 @@
 <template>
+
+
   <div id="app">
-    <img src="./assets/logo.png">
     <h1>{{ msg }}</h1>
     <h6>Made by Láďa Čičátko</h6>
+    <h6>   </h6>
+
     <h6> </h6>
-    <table class="table">
+<form>  
+<label class="h2" align="left">Nový kontakt </label>
+  <div class="form-row">
+    <div class="form-group col-md-3">
+    
+      <input type="text" class="form-control" placeholder="Jméno">
+    </div>
+    <div class="form-group col-md-3">
+      <input type="text" class="form-control" placeholder="Příjmení">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+    </div>
+    <div class="form-group col-md-2">
+      <input type="text" class="form-control" id="inputTel" placeholder="Tel">
+    </div>
+  </div>
+  <div class="form-group col-md-6">
+    <input type="text" class="form-control" id="inputAddress" placeholder="Ulice">
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <input type="text" class="form-control" id="inputCity" placeholder="Město">
+    </div>
+    
+    <div class="form-group col-md-2">
+      <input type="text" class="form-control" id="inputZip" placeholder="PSČ">
+    </div>
+  </div>
+  
+  <div class="form-group col-md-6">
+  <button type="submit" class="btn btn-primary">Vlož kontakt</button>
+  </div>
+</form>
+    <label class="h2">Kontakty</label>
+    <table class="table"> 
   <thead class="thead-light">
     <tr>
       <th scope="col">_id</th>
@@ -28,7 +68,7 @@
       <td>{{ kontakt.Ulice }}</td>
       <td>{{ kontakt.Mesto }}</td>
       <td>{{ kontakt.PSC }}</td>
-      <td><button type="button" class="btn btn-danger" href='"http://localhost:8080/list_user/" + kontakt.Prijmeni'>Delete</button></td>
+      <td><button type="button" class="btn btn-danger" name=kontakt._id  onClick="smazKontakt(${kontakt.Jmeno})">Delete</button></td>
       <td><button types="button" class="btn btn-primary" data-toggle="modal"
                             data-target="#editBookModal" onClick="setEditModal(${book.isbn})">
                             Edit
@@ -36,22 +76,7 @@
 
     </tr>
   </tbody>
-</table>
-    <h2>Essential Links</h2>
-
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs hovno hovno hovno</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+  </table>
   </div>
 </template>
 
@@ -73,10 +98,20 @@ export default {
                         console.log(response.data);
                         this.kontakty = response.data;
                     });
+    },
+    zapis_kontakt(){
+      axios
+            .post(`http://localhost:8080/vloz_user.html`)
+    },
+    smazKontakt(jmeno){
+      console.log(jmeno);
     }
   },
+
   mounted() {
         this.vycti_kontakty();
+        this.zapis_kontakt();
+        this.smazKontakt();
     },
 }
 </script>
