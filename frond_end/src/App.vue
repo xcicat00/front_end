@@ -3,11 +3,11 @@
   <div>
     <h1>{{ msg }}</h1>
     <h6  color="blue" >Made by Láďa Čičátko</h6>
-    <button type="button" class="btn btn-primary" data-toggle="button">
+    <button type="button" class="btn btn-primary" @click="toggleUkazKontakt()" data-toggle="button">
     Zadej kontakt
     </button>
   </div>  
-<div v-shov="ukazZadejKontakt">  
+<div v-if="this.ukazZadejKontakt">  
 <form>  
   <label class="h2" align="left">Nový kontakt </label>
     <div class="form-row">
